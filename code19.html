@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingBits Event</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: linear-gradient(45deg, #000, #121212);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        header {
+            background: linear-gradient(45deg, #1DB954, #4A90E2);
+            text-align: center;
+            padding: 4% 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2% auto;
+            padding: 2%;
+            background: linear-gradient(45deg, #292929, #121212);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #fff;
+        }
+
+        #countdown {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 30px;
+            color: #1db954;
+        }
+
+        #timer {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1db954;
+        }
+
+        .register-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .register-button button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #1DB954, #4A90E2);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .register-button button:hover {
+            background: linear-gradient(45deg, #168f43, #3578bc);
+        }
+
+        #registrationForm {
+            display: none;
+            width: 90%;
+            max-width: 800px;
+            margin: 2% auto;
+            padding: 2%;
+            background: linear-gradient(45deg, #292929, #121212);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #registrationForm input[type="text"],
+        #registrationForm input[type="email"],
+        #registrationForm input[type="tel"] {
+            width: 95%;
+            padding: 15px;
+            border: 1px solid #1db954;
+            border-radius: 20px;
+            background-color: #121212;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        #registrationForm label {
+            margin-bottom: 10px;
+            display: block;
+            color: #fff;
+        }
+
+        #registrationForm button[type="submit"] {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #1DB954, #4A90E2);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #verificationMessage {
+            display: none;
+            width: 90%;
+            max-width: 800px;
+            margin: 2% auto;
+            padding: 2%;
+            background: linear-gradient(45deg, #292929, #121212);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #verificationMessage p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #fff;
+            text-align: center;
+        }
+
+        #verificationMessage button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #1DB954, #4A90E2);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        @media (max-width: 768px) {
+            .container, #registrationForm, #verificationMessage {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 0;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 2%;
+                margin: 2% auto;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            #countdown {
+                font-size: 18px;
+                margin-top: 20px;
+            }
+
+            #timer {
+                font-size: 22px;
+            }
+
+            .register-button button {
+                font-size: 18px;
+            }
+
+            #registrationForm, #verificationMessage {
+                padding: 2%;
+            }
+        }
+
+        /* Add a font-family style for the message */
+        #birthdayMessage {
+            font-family: 'Arial', sans-serif; /* Change to your preferred font */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CodingBits Event</h1>
+        <p>Join us on September 5th, 2023, for a day of coding and learning!</p>
+    </header>
+
+    <div class="container">
+        <h2>About CodingBits</h2>
+        <p>
+            CodingBits is an annual coding event that brings together coding enthusiasts, developers, and tech enthusiasts from around the world.
+            It's a day filled with coding challenges, workshops, and networking opportunities.
+            Join us for an exciting day of coding and learning!
+        </p>
+
+        <div id="countdown">
+            <p>Countdown to the event:</p>
+            <div id="timer">Loading...</div>
+        </div>
+        
+        <!-- Register button -->
+        <div class="register-button">
+            <button id="openRegistrationForm">Register Now</button>
+        </div>
+    </div>
+
+    <!-- Registration form (initially hidden) -->
+    <div id="registrationForm">
+        <h2 style="text-align: center; color: #1DB954;">Registration</h2>
+        <form id="registrationFormElement">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+
+            <!-- Add more registration fields as needed -->
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Verification message and Verify button (initially hidden) -->
+    <div id="verificationMessage">
+        <h2 style="text-align: center; color: #1DB954;">Verification</h2>
+        <p>You are just one step away from being verified.</p>
+        <button id="verifyButton">Verify</button>
+    </div>
+
+    <!-- Birthday message and embedded YouTube video (initially hidden) -->
+    <div id="birthdayMessage" style="display: none;">
+        <h1 style="text-align: center; font-size: 36px; margin-top: 100px;">HAPPY BIRTHDAY ANUSHKA</h1>
+        <p style="text-align: center; font-size: 18px; margin-top: 20px;">
+            So first of all a very happy or say happiest birthday to the google wali didi..🥳😂<br>
+            Toh kaisa lag rha hai adult hood mai aake..😂 no more didi ab ye didi aunty banti jaa rahi hai..🤪<br>
+            I wish your day is going great, cheerful and happy and i wish your every single day that comes is fullfilled with happiness like on the birthday..😃<br>
+            I don't know today also you studying also or not but if you then close the books and have some family time,..☺️ and agar cake kaate toh thoda sa bacha hua mujhe bhi bhijwa dena..😃🎂<br>
+            And also do great in studies, programming seekhni hai uss jaise grades nahi laane..😂<br>
+            But i believe you can do better and you sure will, google-microsoft ko tera nahi tujhe unka interview lena hai..😂😃<br>
+            And again ek aur koshish to make this birthday a lil special in the best way i can,..😃 and i hope this brings a smile on your face..🤔🎉
+        </p>
+
+        <!-- Embedded YouTube video (initially hidden) -->
+        <iframe id="youtubeVideo" width="560" height="315" src="https://www.youtube.com/embed/tL6SQ2PGXV4" frameborder="0" allowfullscreen style="display: none;"></iframe>
+    </div>
+
+    <!-- JavaScript code to handle the "Verify" button click -->
+    <script>
+        // Calculate the time remaining until the event
+        const eventDate = new Date('2023-09-05T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = eventDate - now;
+
+            if (timeRemaining <= 0) {
+                document.getElementById('timer').innerHTML = 'Event has started!';
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Open registration form when the button is clicked
+        document.getElementById('openRegistrationForm').addEventListener('click', function () {
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('verificationMessage').style.display = 'none'; // Hide verification message
+        });
+
+        // Handle form submission
+        document.getElementById('registrationFormElement').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission behavior
+            
+            // Hide the registration form
+            document.getElementById('registrationForm').style.display = 'none';
+            
+            // Display the verification message
+            document.getElementById('verificationMessage').style.display = 'block';
+        });
+
+        // Handle the "Verify" button click
+        document.getElementById('verifyButton').addEventListener('click', function () {
+            // Hide the verification message
+            document.getElementById('verificationMessage').style.display = 'none';
+
+            // Display the birthday message with the embedded YouTube video
+            document.getElementById('birthdayMessage').style.display = 'block';
+            document.getElementById('youtubeVideo').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
